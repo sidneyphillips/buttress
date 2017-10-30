@@ -23,4 +23,7 @@ public class trapRoom implements room {
 		int result[] = new int[] {a, b};
 		return result;
 	}
+	public void setFound() {
+		this.discovered = true;
+	}
 }

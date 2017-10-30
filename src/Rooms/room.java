@@ -5,4 +5,5 @@ public interface room {
 	public abstract boolean sellingGoods();
 	public abstract String roomID();
 	public abstract int [] indexOf();
+	public abstract void setFound();
 }

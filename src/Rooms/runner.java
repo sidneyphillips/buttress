@@ -79,89 +79,90 @@ public class runner {
 			}
 		}
 		boolean chosen = false;
-		Scanner sc=new Scanner(System.in);
-		System.out.println("\nType to move in a direction.");
-		while(!chosen)
-		{	
-			
-			String direction = sc.nextLine();
-			
-			if((direction.toLowerCase().equals("up") || direction.toLowerCase().equals("north"))&&player.canUp())
-			{
-				player.move("up");
-				chosen = true;
-				System.out.println(player.playerA());
-				System.out.println(player.playerB());
-			}
-			else if((direction.toLowerCase().equals("down") || direction.toLowerCase().equals("south"))&&player.canDown())
-			{
-				player.move("down");
-				chosen = true;
-				System.out.println(player.playerA());
-				System.out.println(player.playerB());
-			}
-			else if((direction.toLowerCase().equals("left") || direction.toLowerCase().equals("west"))&&player.canLeft()) 
-			{
-				player.move("left");
-				chosen = true;
-				System.out.println(player.playerA());
-				System.out.println(player.playerB());
-			}
-			else if((direction.toLowerCase().equals("right") || direction.toLowerCase().equals("east"))&&player.canRight()) 
-			{
-				player.move("right");
-				chosen = true;
-				System.out.println(player.playerA());
-				System.out.println(player.playerB());
-			}
-			
-			else {
-				System.out.print("\nPlease move in another direction.\n");
-			}
-			
-		}
-		System.out.println("---------------------------\nTHE IMPENETRABLE BUTTRESS™");
-		for(int x = 0; x < 5; x++)
+		
+		Scanner sc = new Scanner(System.in);
+		while(!won)
 		{
-			for (int y = 0; y < 5; y++)
+			System.out.println("\nType to move in a direction.");
+			chosen = false;
+			while(!chosen)
 			{
-				if(x==0&&y==0)
+				
+				String direction = sc.nextLine();
+				if((direction.toLowerCase().equals("up") || direction.toLowerCase().equals("north"))&&player.canUp())
 				{
-					System.out.print("     ");
+					player.move("up");
+					chosen = true;
+					roomArr[inc][player.playerA()][player.playerB()].setFound();
 				}
-				if(x == player.playerA()&&y == player.playerB()) {
-					if(y < 4) {
-							System.out.print("[i]");
-						}
-					else {
-							System.out.print("[i]\n     ");
-						}
-					
+				else if((direction.toLowerCase().equals("down") || direction.toLowerCase().equals("south"))&&player.canDown())
+				{
+					player.move("down");
+					chosen = true;
+					roomArr[inc][player.playerA()][player.playerB()].setFound();
+				}
+				else if((direction.toLowerCase().equals("left") || direction.toLowerCase().equals("west"))&&player.canLeft()) 
+				{
+					player.move("left");
+					chosen = true;
+					roomArr[inc][player.playerA()][player.playerB()].setFound();
+				}
+				else if((direction.toLowerCase().equals("right") || direction.toLowerCase().equals("east"))&&player.canRight()) 
+				{
+					player.move("right");
+					chosen = true;
+					roomArr[inc][player.playerA()][player.playerB()].setFound();
 				}
 				
-				else if(y < 4) {
-					
-					if(roomArr[0][x][y].isFound()&&roomArr[0][x][y].roomID()=="e"&&roomArr[0][x][y].sellingGoods())
-					{
-					System.out.print("["+roomArr[inc][x][y].roomID()+"]");
-					}
-					else if(roomArr[0][x][y].isFound()) {
-						System.out.print("[ ]");
-					}
-					else {
-						System.out.print("[X]");
-					}
-				}
 				else {
-					if(roomArr[0][x][y].isFound())
+					System.out.print("\nPlease move in another direction.\n");
+				}
+				
+			}
+			System.out.println("---------------------------\nTHE IMPENETRABLE BUTTRESS™");
+			for(int x = 0; x < 5; x++)
+			{
+				for (int y = 0; y < 5; y++)
+				{
+					if(x==0&&y==0)
 					{
-					System.out.print("[ ]\n     ");
+						System.out.print("     ");
+					}
+					if(x == player.playerA()&&y == player.playerB()) {
+						if(y < 4) {
+								System.out.print("[i]");
+							}
+						else {
+								System.out.print("[i]\n     ");
+							}
+						
+					}
+					
+					else if(y < 4) {
+						
+						if(roomArr[inc][x][y].isFound()&&roomArr[inc][x][y].roomID()=="e"&&roomArr[inc][x][y].sellingGoods())
+						{
+						System.out.print("["+roomArr[inc][x][y].roomID()+"]");
+						}
+						else if(roomArr[inc][x][y].isFound()) {
+							System.out.print("[ ]");
+						}
+						else {
+							System.out.print("[X]");
+						}
 					}
 					else {
-						System.out.print("[X]\n     ");
+						if(roomArr[inc][x][y].isFound())
+						{
+						System.out.print("[ ]\n     ");
+						}
+						else {
+							System.out.print("[X]\n     ");
+						}
 					}
 				}
 			}
 		}
+		sc.close();
 	}
 }

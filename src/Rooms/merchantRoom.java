@@ -32,4 +32,8 @@ public class merchantRoom implements room {
 		int result[] = new int[] {a, b};
 		return result;
 	}
+	public void setFound() {
+		this.discovered = true;
+		
+	}
 }

@@ -26,4 +26,7 @@ public class monsterRoom implements room{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public void setFound() {
+		this.discovered = true;
+	}
 }
