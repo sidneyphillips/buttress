@@ -1,5 +1,5 @@
 package Rooms;
-
+//Made by Sid P, 10/30/17
 public class exitRoom implements room {
 	private boolean discovered = false;
 	private int a;
