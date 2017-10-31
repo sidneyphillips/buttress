@@ -8,12 +8,12 @@ public class utilities {
 		int temp = (int) (Math.floor(Math.random()*3));
 		if(temp == 0)
 		{
-			int temp2 = (int) Math.random()*10;
-			return new merchantRoom((int) Math.floor(Math.random()*5), temp2, a, b);
+			int temp2 = (int) Math.floor(Math.random()*2);
+			return new merchantRoom((int) Math.floor(Math.random()*5)+1, temp2, a, b);
 		}
 		if(temp == 1)
 		{
-			int temp2 = (int) Math.random()*5;
+			int temp2 = (int) Math.floor(Math.random()*5);
 			return new monsterRoom((int) Math.floor(Math.random()*3+1), temp2, a, b);
 		}
 		return new trapRoom(a, b);

@@ -15,8 +15,8 @@ public class startRoom implements room {
 	public boolean isFound() {
 		return this.discovered;
 	}
-	public boolean sellingGoods() {
-		return false;
+	public int sellingGoods() {
+		return 0;
 	}
 	public int[] indexOf() {
 		int result[] = new int[] {a, b};
@@ -24,5 +24,26 @@ public class startRoom implements room {
 	}
 	public void setFound() {
 		this.discovered = true;
+	}
+	public String monsterString()
+	{
+		return "";
+	}
+	public int monsterDifficulty() {
+		return 0;
+	}
+	public int getPrice()
+	{
+		return 0;
+	}
+	@Override
+	public boolean hasGoods() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public void sold() {
+		// TODO Auto-generated method stub
+		
 	}
 }

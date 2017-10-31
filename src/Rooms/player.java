@@ -1,12 +1,43 @@
 package Rooms;
 //Made by Sid P, 10/30/17
 public class player {
+	private static int hp;
+	private static int maxHp;
 	private static int a;
 	private static int b;
+	private static int armour = 0;
 	private static int[] spawnList = new int[4];
-	public player(int a, int b, int gold, int heal) {
+	private static int gold = 0;
+	public player(int a, int b, int gold, int heal, int hp) {
 		this.a = a;
 		this.b = b;
+		this.hp = hp;
+		this.maxHp = hp;
+	}
+	public static int changeHealth(int change) {
+		if(change + armour > 0 && change < 0)
+		{
+			return hp;
+		}
+		if(change > 0)
+		{
+			hp += change;
+			if (hp > maxHp)
+			{
+				return maxHp;
+			}
+			return hp;
+		}
+		hp += (change + armour);
+		return hp;
+	}
+	public static int changeGold(int change)
+	{
+		gold += change;
+		return gold;
+	}
+	public static void addArmour() {
+		armour++;
 	}
 	public static int playerA() {
 		return a;

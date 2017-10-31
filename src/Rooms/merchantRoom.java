@@ -18,12 +18,20 @@ public class merchantRoom implements room {
 	public boolean hasGoods() {
 		return this.selling;
 	}
+	public void sold()
+	{
+		selling = false;
+	}
 	public String roomID() {
 		return "e";
 	}
 
-	public boolean sellingGoods() {
-		return selling;
+	public int sellingGoods() {
+		return goods;
+	}
+	public int getPrice()
+	{
+		return price;
 	}
 	public boolean isFound() {
 		return this.discovered;
@@ -33,7 +41,13 @@ public class merchantRoom implements room {
 		return result;
 	}
 	public void setFound() {
-		this.discovered = true;
-		
+		this.discovered = true;	
+	}
+	public String monsterString()
+	{
+		return "";
+	}
+	public int monsterDifficulty() {
+		return 0;
 	}
 }
