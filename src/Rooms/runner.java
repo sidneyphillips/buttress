@@ -266,6 +266,10 @@ public class runner {
 				roomArr[inc][player.playerA()][player.playerB()].setFound();
 				System.out.print("\nYou encounter a wandering merchant. He is selling a "+temp+" for "+roomArr[inc][player.playerA()][player.playerB()].getPrice()+" gold.\nTo buy, type 'buy'. To leave, choose any direction.");
 			}
+			else if(roomArr[inc][player.playerA()][player.playerB()].roomID().equals("x")) {
+				
+			}
+
 		}
 		sc.close();
 	}
