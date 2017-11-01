@@ -47,7 +47,7 @@ public class runner {
 			}
 		}
 		drawArr(roomArr, inc);
-		boolean chosen = false;
+		boolean chosen;
 		
 		Scanner sc = new Scanner(System.in);
 		while(!won&&!lost)
@@ -101,8 +101,9 @@ public class runner {
 					String temp = "";
 					if(inc > 2)
 					{
-						System.out.print("\nCongratulations, you have successfully penetrated the buttress.");
+						System.out.print("\nCongratulations, you have successfully penetrated the buttress.\n");
 						won = true;
+						chosen = true;
 					}
 					else
 					{
@@ -123,7 +124,7 @@ public class runner {
 								roomArr[inc][x][y].setHidden();
 							}
 						}
-						System.out.print("\nYou went up to the "+temp+" floor.");
+						System.out.print("\nYou went up to the "+temp+" floor.\n");
 						drawArr(roomArr, inc);
 					}
 				}
@@ -160,8 +161,9 @@ public class runner {
 			drawArr(roomArr, inc);
 			if(roomArr[inc][player.playerA()][player.playerB()].roomID().equals("m")&&!roomArr[inc][player.playerA()][player.playerB()].isFound()) {
 				System.out.print("\nYou encountered a "+ roomArr[inc][player.playerA()][player.playerB()].monsterString()+". ");
-				
+				int temp2 = player.changeHealth(0);
 				player.changeHealth(-1*roomArr[inc][player.playerA()][player.playerB()].monsterDifficulty());
+				int temp3 = player.changeHealth(0);
 				
 				if(player.changeHealth(0) <= 0)
 				{
@@ -177,7 +179,14 @@ public class runner {
 						rewardMoney = 1;
 					}
 					player.changeGold(rewardMoney);
-					System.out.print("You defeated the "+roomArr[inc][player.playerA()][player.playerB()].monsterString()+", but it dealt you "+roomArr[inc][player.playerA()][player.playerB()].monsterDifficulty()+" damage. You have "+player.changeHealth(0)+" health remaining.\nThe "+roomArr[inc][player.playerA()][player.playerB()].monsterString()+" dropped " + rewardMoney+" gold. You have "+player.changeGold(0)+ " gold.");
+					if(temp2-temp3 == roomArr[inc][player.playerA()][player.playerB()].monsterDifficulty())
+					{
+						System.out.print("You defeated the "+roomArr[inc][player.playerA()][player.playerB()].monsterString()+", but it dealt you "+roomArr[inc][player.playerA()][player.playerB()].monsterDifficulty()+" damage. You have "+player.changeHealth(0)+" health remaining.\nThe "+roomArr[inc][player.playerA()][player.playerB()].monsterString()+" dropped " + rewardMoney+" gold. You have "+player.changeGold(0)+ " gold.");
+					}
+					else {
+						System.out.print("You defeated the "+roomArr[inc][player.playerA()][player.playerB()].monsterString()+", but it dealt you a reduced "+(temp2-temp3)+" damage. You have "+player.changeHealth(0)+" health remaining.\nThe "+roomArr[inc][player.playerA()][player.playerB()].monsterString()+" dropped " + rewardMoney+" gold. You have "+player.changeGold(0)+ " gold.");
+
+					}
 				}
 				
 			}
