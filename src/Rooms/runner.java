@@ -1,5 +1,6 @@
 package Rooms;
 //Made by Sid P, 10/30/17
+//Completed 11/1/17
 import java.util.Scanner;
 import Rooms.room;
 import Rooms.utilities;
