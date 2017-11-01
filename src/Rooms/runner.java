@@ -46,47 +46,7 @@ public class runner {
 				player.nextSpawn(a,b);
 			}
 		}
-		System.out.println("THE IMPENETRABLE BUTTRESS™");
-		for(int x = 0; x < 5; x++)
-		{
-			for (int y = 0; y < 5; y++)
-			{
-				if(x==0&&y==0)
-				{
-					System.out.print("     ");
-				}
-				if(x == player.playerA()&&y == player.playerB()) {
-					if(y < 4) {
-							System.out.print("[i]");
-						}
-					else {
-							System.out.print("[i]\n     ");
-						}
-					}
-					else if(y < 4) {
-					
-					if(roomArr[0][x][y].isFound()&&roomArr[0][x][y].roomID()=="e"&&roomArr[0][x][y].hasGoods())
-					{
-					System.out.print("["+roomArr[inc][x][y].roomID()+"]");
-					}
-					else if(roomArr[0][x][y].isFound()) {
-						System.out.print("[ ]");
-					}
-					else {
-						System.out.print("[X]");
-					}
-				}
-				else {
-					if(roomArr[0][x][y].isFound())
-					{
-					System.out.print("[ ]\n     ");
-					}
-					else {
-						System.out.print("[X]\n     ");
-					}
-				}
-			}
-		}
+		drawArr(roomArr, inc);
 		boolean chosen = false;
 		
 		Scanner sc = new Scanner(System.in);
@@ -94,7 +54,7 @@ public class runner {
 		{
 			
 			chosen = false;
-			while(!chosen)
+			while(!chosen&&!won)
 			{
 				System.out.println("\nType to move in a direction.");
 				String action = sc.nextLine();
@@ -113,7 +73,14 @@ public class runner {
 							else if(roomArr[inc][player.playerA()][player.playerB()].sellingGoods()==1)
 							{
 								player.changeHealth(10);
-								System.out.print("\nYou bought the potion and restored 10 health. You have "+player.changeHealth(0)+" health and "+player.changeGold(0)+" gold.\n");
+								if(player.changeHealth(0)==15)
+								{
+									System.out.print("\nYou bought the potion and it restored you to maximum health. You have "+player.changeHealth(0)+" health and "+player.changeGold(0)+" gold.\n");
+								}
+								else
+								{
+									System.out.print("\nYou bought the potion and restored 10 health. You have "+player.changeHealth(0)+" health and "+player.changeGold(0)+" gold.\n");
+								}
 							}
 							roomArr[inc][player.playerA()][player.playerB()].sold();
 						}
@@ -121,10 +88,43 @@ public class runner {
 						{
 							System.out.print("\nYou can't afford it.\n");
 						}
+						
 					}
 					else
 					{
 						System.out.print("\nThe room is clear.");
+					}
+				}
+				else if((action.toLowerCase().equals("leave")||action.toLowerCase().equals("yes"))&&roomArr[inc][player.playerA()][player.playerB()].roomID().equals("x"))
+				{
+					inc++;
+					String temp = "";
+					if(inc > 2)
+					{
+						System.out.print("\nCongratulations, you have successfully penetrated the buttress.");
+						won = true;
+					}
+					else
+					{
+						if(inc == 1)
+						{
+							temp = "second";
+						}
+						if(inc == 2)
+						{
+							temp = "third";
+						}
+						
+						roomArr[inc][player.playerA()][player.playerB()].setFound();
+						for(int x = 0; x < 5; x++)
+						{
+							for (int y = 0; y < 5; y++)
+							{
+								roomArr[inc][x][y].setHidden();
+							}
+						}
+						System.out.print("\nYou went up to the "+temp+" floor.");
+						drawArr(roomArr, inc);
 					}
 				}
 				else if((action.toLowerCase().equals("up") || action.toLowerCase().equals("north"))&&player.canUp())
@@ -157,56 +157,12 @@ public class runner {
 				}
 				
 			}
-			System.out.println("---------------------------\nTHE IMPENETRABLE BUTTRESS™");
-			for(int x = 0; x < 5; x++)
-			{
-				for (int y = 0; y < 5; y++)
-				{
-					if(x==0&&y==0)
-					{
-						System.out.print("     ");
-					}
-					if(x == player.playerA()&&y == player.playerB()) {
-						if(y < 4) {
-								System.out.print("[i]");
-							}
-						else {
-								System.out.print("[i]\n     ");
-							}
-						
-					}
-					
-					else if(y < 4) {
-						
-						if(roomArr[inc][x][y].isFound()&&roomArr[inc][x][y].roomID()=="e"&&roomArr[inc][x][y].hasGoods())
-						{
-						System.out.print("[$]");
-						}
-						else if(roomArr[inc][x][y].isFound()) {
-							System.out.print("[ ]");
-						}
-						else {
-							System.out.print("[X]");
-						}
-					}
-					else {
-						if(roomArr[inc][x][y].isFound()&&roomArr[inc][x][y].roomID()=="e"&&roomArr[inc][x][y].hasGoods())
-						{
-						System.out.print("[$]\n     ");
-						}
-						else if(roomArr[inc][x][y].isFound())
-						{
-						System.out.print("[ ]\n     ");
-						}
-						else {
-							System.out.print("[X]\n     ");
-						}
-					}
-				}
-			}
+			drawArr(roomArr, inc);
 			if(roomArr[inc][player.playerA()][player.playerB()].roomID().equals("m")&&!roomArr[inc][player.playerA()][player.playerB()].isFound()) {
 				System.out.print("\nYou encountered a "+ roomArr[inc][player.playerA()][player.playerB()].monsterString()+". ");
+				
 				player.changeHealth(-1*roomArr[inc][player.playerA()][player.playerB()].monsterDifficulty());
+				
 				if(player.changeHealth(0) <= 0)
 				{
 					System.out.print("The "+roomArr[inc][player.playerA()][player.playerB()].monsterString()+" has slain you.\nGAME OVER");
@@ -223,10 +179,7 @@ public class runner {
 					player.changeGold(rewardMoney);
 					System.out.print("You defeated the "+roomArr[inc][player.playerA()][player.playerB()].monsterString()+", but it dealt you "+roomArr[inc][player.playerA()][player.playerB()].monsterDifficulty()+" damage. You have "+player.changeHealth(0)+" health remaining.\nThe "+roomArr[inc][player.playerA()][player.playerB()].monsterString()+" dropped " + rewardMoney+" gold. You have "+player.changeGold(0)+ " gold.");
 				}
-				roomArr[inc][player.playerA()][player.playerB()].setFound();
-			}
-			else if(roomArr[inc][player.playerA()][player.playerB()].roomID().equals("m")&&roomArr[inc][player.playerA()][player.playerB()].isFound()) {
-				System.out.print("\nThe room is clear.");
+				
 			}
 			else if(roomArr[inc][player.playerA()][player.playerB()].roomID().equals("t")) {
 				System.out.print("\nYou encounter a room full of traps. ");
@@ -251,9 +204,9 @@ public class runner {
 				else {
 					System.out.println("\nYou nimbly dodge all of the traps without recieving a scratch.");
 				}
-				roomArr[inc][player.playerA()][player.playerB()].setFound();
+				
 			}
-			else if(roomArr[inc][player.playerA()][player.playerB()].roomID().equals("e")) {
+			else if(roomArr[inc][player.playerA()][player.playerB()].roomID().equals("e")&&roomArr[inc][player.playerA()][player.playerB()].hasGoods()) {
 				String temp = "";
 				if(roomArr[inc][player.playerA()][player.playerB()].sellingGoods() == 0)
 				{
@@ -267,10 +220,72 @@ public class runner {
 				System.out.print("\nYou encounter a wandering merchant. He is selling a "+temp+" for "+roomArr[inc][player.playerA()][player.playerB()].getPrice()+" gold.\nTo buy, type 'buy'. To leave, choose any direction.");
 			}
 			else if(roomArr[inc][player.playerA()][player.playerB()].roomID().equals("x")) {
-				
+				System.out.print("\nYou found the exit of this floor. Do you want to leave? ");
 			}
-
+			else
+			{
+				System.out.print("\nThe room is clear.");
+			}
+			roomArr[inc][player.playerA()][player.playerB()].setFound();
 		}
 		sc.close();
+	}
+	public static void drawArr(room[][][] roomArr, int inc)
+	{
+		System.out.println("---------------------------\nTHE IMPENETRABLE BUTTRESS™");
+		for(int x = 0; x < 5; x++)
+		{
+			for (int y = 0; y < 5; y++)
+			{
+				if(x==0&&y==0)
+				{
+					System.out.print("     ");
+				}
+				if(x == player.playerA()&&y == player.playerB()) {
+					if(y < 4) {
+							System.out.print("[i]");
+						}
+					else {
+							System.out.print("[i]\n     ");
+						}
+					
+				}
+				
+				else if(y < 4) {
+					
+					if(roomArr[inc][x][y].isFound()&&roomArr[inc][x][y].roomID().equals("e")&&roomArr[inc][x][y].hasGoods())
+					{
+					System.out.print("[$]");
+					}
+					else if(roomArr[inc][x][y].isFound()&&roomArr[inc][x][y].roomID().equals("x"))
+					{
+						System.out.print("[e]");
+					}
+					else if(roomArr[inc][x][y].isFound()) {
+						System.out.print("[ ]");
+					}
+					else {
+						System.out.print("[X]");
+					}
+				}
+				else {
+					if(roomArr[inc][x][y].isFound()&&roomArr[inc][x][y].roomID().equals("e")&&roomArr[inc][x][y].hasGoods())
+					{
+					System.out.print("[$]\n     ");
+					}
+					else if(roomArr[inc][x][y].isFound()&&roomArr[inc][x][y].roomID().equals("x"))
+					{
+						System.out.print("[e]\n     ");
+					}
+					else if(roomArr[inc][x][y].isFound())
+					{
+					System.out.print("[ ]\n     ");
+					}
+					else {
+						System.out.print("[X]\n     ");
+					}
+				}
+			}
+		}
 	}
 }

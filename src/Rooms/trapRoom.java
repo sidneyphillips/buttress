@@ -1,6 +1,7 @@
 package Rooms;
 //Made by Sid P, 10/30/17
-public class trapRoom implements room {
+public class trapRoom implements room 
+{
 	private boolean discovered = false;	
 	private int a;
 	private int b;
@@ -9,42 +10,43 @@ public class trapRoom implements room {
 		this.a = a;
 		this.b = b;
 	}
-	public String roomID() {
+	public String roomID() 
+	{
 		return "t";
 	}
-	public boolean isFound() {
+	public boolean isFound() 
+	{
 		return this.discovered;
 	}
-	public int sellingGoods() {
+	public int sellingGoods() 
+	{
 		return 0;
-	}
-	@Override
-	public int[] indexOf() {
-		int result[] = new int[] {a, b};
-		return result;
 	}
 	public void setFound() {
 		this.discovered = true;
 	}
-	public int monsterDifficulty() {
+	public int monsterDifficulty() 
+	{
 		return 0;
 	}
-	@Override
-	public String monsterString() {
+	public String monsterString() 
+	{
 		return "";
 	}
 	public int getPrice()
 	{
 		return 0;
 	}
-	@Override
-	public boolean hasGoods() {
-		// TODO Auto-generated method stub
+	public boolean hasGoods() 
+	{
 		return false;
 	}
-	@Override
-	public void sold() {
-		// TODO Auto-generated method stub
+	public void sold() 
+	{
 		
+	}
+	public void setHidden() 
+	{
+		this.discovered = false;
 	}
 }

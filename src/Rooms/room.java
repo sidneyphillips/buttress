@@ -4,8 +4,8 @@ public interface room {
 	public abstract boolean isFound();
 	public abstract int sellingGoods();
 	public abstract String roomID();
-	public abstract int [] indexOf();
 	public abstract void setFound();
+	public abstract void setHidden();
 	public abstract String monsterString();
 	public abstract int monsterDifficulty();
 	public abstract int getPrice();

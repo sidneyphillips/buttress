@@ -1,6 +1,7 @@
 package Rooms;
 //Made by Sid P, 10/30/17
-public class player {
+public class player 
+{
 	private static int hp;
 	private static int maxHp;
 	private static int a;
@@ -8,27 +9,35 @@ public class player {
 	private static int armour = 0;
 	private static int[] spawnList = new int[4];
 	private static int gold = 0;
-	public player(int a, int b, int gold, int heal, int hp) {
+	public player(int a, int b, int gold, int heal, int hp) 
+	{
 		this.a = a;
 		this.b = b;
 		this.hp = hp;
 		this.maxHp = hp;
 	}
-	public static int changeHealth(int change) {
-		if(change + armour > 0 && change < 0)
+	public static int changeHealth(int change) 
+	{
+		if(change < 0)
 		{
-			return hp;
-		}
-		if(change > 0)
-		{
-			hp += change;
-			if (hp > maxHp)
+			hp = hp + change;
+			if(armour > -1 * change )
 			{
-				return maxHp;
+				hp = hp - change;
 			}
-			return hp;
+			else
+			{
+				hp = hp + armour;
+			}
 		}
-		hp += (change + armour);
+		else if(change > 0)
+		{
+			hp+= change;
+		}
+		if(hp > maxHp)
+		{
+			hp = maxHp;
+		}
 		return hp;
 	}
 	public static int changeGold(int change)
@@ -36,33 +45,41 @@ public class player {
 		gold += change;
 		return gold;
 	}
-	public static void addArmour() {
+	public static void addArmour() 
+	{
 		armour++;
 	}
-	public static int playerA() {
+	public static int playerA() 
+	{
 		return a;
 	}
-	public static int playerB() {
+	public static int playerB() 
+	{
 		return b;
 	}
 	public static boolean canUp()
 	{
 		return(a != 0);
 	}
-	public static boolean canDown() {
+	public static boolean canDown() 
+	{
 		return(a != 4);
 	}
-	public static boolean canLeft() {
+	public static boolean canLeft() 
+	{
 		return(b != 0);
 	}
-	public static boolean canRight() {
+	public static boolean canRight() 
+	{
 		return(b != 4);
 	}
-	public static void nextSpawn(int a, int b) {
+	public static void nextSpawn(int a, int b) 
+	{
 		spawnList[0] = a;
 		spawnList[1] = b;
 	}
-	public static void move(String string) {
+	public static void move(String string) 
+	{
 		if(string == "up")
 		{
 			a -= 1;

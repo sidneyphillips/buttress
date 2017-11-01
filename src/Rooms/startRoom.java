@@ -1,24 +1,30 @@
 package Rooms;
 //Made by Sid P, 10/30/17
-public class startRoom implements room {
+public class startRoom implements room 
+{
 	private boolean discovered = true;
 	private int a;
 	private int b;
 	
-	public startRoom(int a, int b) {
+	public startRoom(int a, int b) 
+	{
 		this.a = a;
 		this.b = b;
 	}
-	public String roomID() {
+	public String roomID() 
+	{
 		return "s";
 	}
-	public boolean isFound() {
+	public boolean isFound() 
+	{
 		return this.discovered;
 	}
-	public int sellingGoods() {
+	public int sellingGoods() 
+	{
 		return 0;
 	}
-	public int[] indexOf() {
+	public int[] indexOf() 
+	{
 		int result[] = new int[] {a, b};
 		return result;
 	}
@@ -29,21 +35,24 @@ public class startRoom implements room {
 	{
 		return "";
 	}
-	public int monsterDifficulty() {
+	public int monsterDifficulty() 
+	{
 		return 0;
 	}
 	public int getPrice()
 	{
 		return 0;
 	}
-	@Override
-	public boolean hasGoods() {
-		// TODO Auto-generated method stub
+	public boolean hasGoods() 
+	{
 		return false;
 	}
-	@Override
-	public void sold() {
-		// TODO Auto-generated method stub
+	public void sold() 
+	{
 		
+	}
+	public void setHidden() 
+	{
+		this.discovered = false;
 	}
 }
