@@ -1,4 +1,4 @@
-package Rooms;
+package Character;
 //Made by Sid P, 10/30/17
 public class player 
 {

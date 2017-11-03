@@ -1,9 +1,10 @@
-package Rooms;
+package Game;
 //Made by Sid P, 10/30/17
 //Completed 11/1/17
 import java.util.Scanner;
+
+import Character.player;
 import Rooms.room;
-import Rooms.utilities;
 
 public class runner {
 	public static void main(String[] args) {

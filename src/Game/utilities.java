@@ -1,4 +1,12 @@
-package Rooms;
+package Game;
+
+import Rooms.exitRoom;
+import Rooms.merchantRoom;
+import Rooms.monsterRoom;
+import Rooms.room;
+import Rooms.startRoom;
+import Rooms.trapRoom;
+
 //Made by Sid P, 10/30/17
 public class utilities {
 	public int a;
