@@ -253,13 +253,10 @@ public class runner {
 					System.out.print("     ");
 				}
 				if(x == player.playerA()&&y == player.playerB()) {
-					if(y < 4) {
-							System.out.print("[i]");
-						}
-					else {
-							System.out.print("[i]\n     ");
-						}
-					
+					System.out.print("[i]");
+					if(!(y < 4)) {
+						System.out.print("\n     ");
+						}					
 				}
 				
 				else if(y < 4) {
