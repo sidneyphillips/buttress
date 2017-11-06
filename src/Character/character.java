@@ -1,7 +1,6 @@
 package Character;
-//Made by Sid P, 10/30/17
-public class player extends character 
-{
+
+public abstract class character {
 	private static int hp;
 	private static int maxHp;
 	private static int a;
@@ -9,9 +8,12 @@ public class player extends character
 	private static int armour = 0;
 	private static int[] spawnList = new int[4];
 	private static int gold = 0;
-	public player(int a, int b, int gold, int hp) 
+	public character(int a, int b, int gold, int hp) 
 	{
-		super( a, b, gold, hp);
+		this.a = a;
+		this.b = b;
+		this.hp = hp;
+		this.maxHp = hp;
 	}
 	public static int changeHealth(int change) 
 	{

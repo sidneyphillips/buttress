@@ -41,7 +41,7 @@ public class runner {
 			roomArr[i][a][b] = utilities.exitRoom(a, b);
 			roomArr[i][c][d] = utilities.startRoom(c, d);
 			if (i == 0) {
-				new player(c, d, 0, 0, 15);
+				new player(c, d, 0, 15);
 			}
 			else
 			{
